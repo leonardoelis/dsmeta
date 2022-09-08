@@ -17,3 +17,13 @@ a, a:hover, a:visited {
     color: unset; /* a tag n terá nenhuma cor diferente da cor padrão*/
     text-decoration: none; /* n terá nenhuma decoração diferente no texto*/
 }
+
+.dsmeta-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto; /* alinha a div no centro */
+}
+
+#sales {
+  padding: 40px 10px;
+}
