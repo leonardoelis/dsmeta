@@ -2,7 +2,8 @@ import NotificationButton from "../NotificationButton";
 import "./styles.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import axios from "axios"
 
 function SalesCard() {
     // Data mínima é a data de 1 ano atrás (-365) e Data máxima é a data de hj
@@ -17,6 +18,15 @@ function SalesCard() {
     // essa função (setMinDate) é chamada no evento onChange do DatePicker, passando o novo valor de data
     const [minDate, setMinDate] = useState(min);
     const [maxDate, setMaxDate] = useState(max); // o mesmo raciocínio se aplica para o useState do maxDate
+
+    // useEffect = hook do react que executa uma função logo após a renderização da página
+    // o segundo parâmetro é um array e quando ele é vazio [], a função do 1 parâmetro será executada apenas uma vez
+    useEffect(() => {
+        axios.get("http://localhost:8080/sales")
+            .then(response => {
+                console.log(response.data);
+            });
+    }, []);
 
     return (
         <div className="dsmeta-card">
