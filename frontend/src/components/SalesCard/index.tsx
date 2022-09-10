@@ -28,13 +28,19 @@ function SalesCard() {
 
     // useEffect = hook do react que executa uma função logo após a renderização da página
     // o segundo parâmetro é um array e quando ele é vazio [], a função do 1º parâmetro será executada apenas uma vez
+    // se houver algo dentro do array, o useEffect deve ser executado toda vez q as variáveis dentro do array forem atualizadas
     useEffect(() => {
-        axios.get(`${BASE_URL}/sales`)
+        // converte a data para o formato usado no backend (yyyy-mm-dd)
+        // .slice(0, 10) -> recorta a string resultante, partindo do 1º caractere até o décimo
+        const dmin = minDate.toISOString().slice(0, 10);
+        const dmax = maxDate.toISOString().slice(0,10);
+
+        axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(response => {
                 // atualiza a variável (lista) sales definida no useState acima
                 setSale(response.data.content);
             });
-    }, []);
+    }, [minDate, maxDate]);
 
     return (
         <div className="dsmeta-card">
